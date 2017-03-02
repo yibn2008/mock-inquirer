@@ -1,0 +1,56 @@
+{
+  "name": "mock-inquirer",
+  "version": "1.0.0",
+  "description": "mock anwsers for inquirer prompt questions",
+  "main": "lib/index.js",
+  "scripts": {
+    "lint": "standard --fix && npm-ensure -t deps",
+    "test": "npm run lint && npm run test-local",
+    "test-local": "mocha -r thunk-mocha test/**/*.test.js",
+    "test-cov": "istanbul cover _mocha -r thunk-mocha test/**/*.test.js",
+    "ci": "npm run lint && npm run test-cov",
+    "beta": "npm test && git release $npm_package_version && npm publish --tag beta",
+    "release": "npm test && npm-ensure -t changelog && git release $npm_package_version && npm publish",
+    "precommit": "standard && npm-ensure -t deps"
+  },
+  "ensure": {
+    "deps": {
+      "checkDirs": [
+        "lib/**/*",
+        "bin/*"
+      ]
+    }
+  },
+  "standard": {
+    "global": [
+      "describe",
+      "it",
+      "beforeEach",
+      "afterEach"
+    ],
+    "ignore": [
+      "/test"
+    ]
+  },
+  "dependencies": {
+    "inquirer": "^1.2.3",
+    "mock-require": "^2.0.1"
+  },
+  "devDependencies": {
+    "mocha": "^3.0.2",
+    "npm-ensure": "^1.0.0",
+    "husky": "0.x",
+    "istanbul": "*",
+    "standard": "^8.2.0",
+    "thunk-mocha": "^1.0.8"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [
+    "mock-inquirer"
+  ],
+  "author": "zoujie.wzj",
+  "license": "ISC"
+}
