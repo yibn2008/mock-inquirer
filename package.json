@@ -46,11 +46,14 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/yibn2008/mock-inquirer.git"
   },
   "keywords": [
-    "mock-inquirer"
+    "mock-inquirer",
+    "inquirer",
+    "test",
+    "mock",
   ],
   "author": "zoujie.wzj",
-  "license": "ISC"
+  "license": "MIT"
 }
