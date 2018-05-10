@@ -52,7 +52,7 @@
     "mock-inquirer",
     "inquirer",
     "test",
-    "mock",
+    "mock"
   ],
   "author": "zoujie.wzj",
   "license": "MIT"

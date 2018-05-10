@@ -8,7 +8,7 @@ mock anwsers for inquirer prompt questions
 - mock `require('inquirer')` and return mocked inquirer instance
 - work well with `npm link` which may cause `require('inqurier')` load different inquirers
 
-*Notice: mock-inquirer only mock `inquirer.prompt` method, any advanced usage may not be work*
+*Notice: mock-inquirer only mock `inquirer.prompt` method, any advanced usage may not work*
 
 ## install
 
