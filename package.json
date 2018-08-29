@@ -1,6 +1,6 @@
 {
   "name": "mock-inquirer",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "mock anwsers for inquirer prompt questions",
   "main": "lib/index.js",
   "scripts": {
