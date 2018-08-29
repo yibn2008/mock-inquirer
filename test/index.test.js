@@ -34,4 +34,30 @@ describe('test mock inquirer', function () {
       reset()
     }
   })
+
+  it('should throw error when validation failed', function* () {
+    let reset = mockInquirer([{
+      number: 'hello'
+    }]);
+    let hasError = false;
+
+    try {
+      yield inquirer.prompt([{
+        type: 'input',
+        message: 'Enter number',
+        name: 'number',
+        validate: function (input) {
+          if (/\d+/.test(input)) return true;
+          return 'Invalid number entered';
+        }
+      }]);
+    } catch (err) {
+      hasError = true;
+      assert.equal(err.message, 'Validation failed for field number');
+    }
+    finally {
+      reset();
+      assert.equal(hasError, true);
+    }
+  })
 })
