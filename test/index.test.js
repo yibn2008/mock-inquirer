@@ -7,9 +7,11 @@ const inquirer = require('inquirer')
 describe('test mock inquirer', function () {
   it('should mock inquirer', function * () {
     let reset = mockInquirer([{
-      hello: 'world'  // will auto fill 'world'
+        hello: 'world'  // will auto fill 'world'
     }, {
       // if anwsers is empty, mockInquirer will fill with default value
+    }, {
+        fail: false
     }])
 
     try {
@@ -27,8 +29,16 @@ describe('test mock inquirer', function () {
         default: true
       }])
 
+      let anwsers3 = yield inquirer.prompt([{
+        type: 'confirm',
+        message: 'mock inquirer will fail:',
+        name: 'fail',
+        default: true
+      }])
+
       assert.equal(anwsers1.hello, 'world')
       assert.equal(anwsers2.like, true)
+      assert.equal(anwsers3.fail, false)
     } finally {
       // reset mock
       reset()
@@ -58,6 +68,41 @@ describe('test mock inquirer', function () {
     finally {
       reset();
       assert.equal(hasError, true);
+    }
+  })
+
+  it('should not generate an answer when the when check fails', function* () {
+    let reset = mockInquirer([{
+        when_true: true,
+        when_false: false,
+        when_function: 'function'
+    }]);
+
+    try {
+      let anwsers = yield inquirer.prompt([{
+        type: 'confirm',
+        message: 'Enter true',
+          name: 'when_true',
+          when: true,
+      }, {
+        type: 'confirm',
+        message: 'Enter false',
+          name: 'when_false',
+          when: false,
+      }, {
+        type: 'input',
+        message: 'Enter function',
+          name: 'when_function',
+          when: function(answers) {
+              return answers.when_true;
+          }
+      }]);
+
+        assert.equal(anwsers.when_true, true);
+        assert.equal(anwsers.when_false, undefined);
+        assert.equal(anwsers.when_function, 'function');
+    } finally {
+      reset();
     }
   })
 })
