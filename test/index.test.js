@@ -105,4 +105,31 @@ describe('test mock inquirer', function () {
       reset();
     }
   })
+
+  it('should handle answers already given to inquirer', function* () {
+    let reset = mockInquirer([{
+        hello: 'world'  // will auto fill 'world'
+    }]);
+
+    try {
+      let anwsers = yield inquirer.prompt([{
+        type: 'input',
+        message: 'I say hello, you say:',
+        name: 'hello'
+      },
+      {
+        type: 'confirm',
+        message: 'mock inquirer is awesome:',
+        name: 'like'
+      }],
+      {
+        like: true
+      })
+
+        assert.equal(anwsers.hello, "world");
+        assert.equal(anwsers.like, true);
+    } finally {
+      reset();
+    }
+  })
 })
